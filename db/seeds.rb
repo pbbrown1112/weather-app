@@ -5,9 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.destroy_all
 
-user1 = User.create(username: 'dude_bro', hometown_city: 'houston', hometown_country: 'USA', email: 'brosforlife@gmail.com', hashed_password: 'asdlfk', salt: '123' )
-user2 = User.create(username: 'dude_brah', hometown_city: 'houston', hometown_country: 'USA', email: 'brahsforlife@gmail.com', hashed_password: 'asdlfk', salt: '123' )
+user1 = User.create(username: 'dude_bro', hometown_city: 'houston', hometown_country: 'USA', email: 'brosforlife@gmail.com', password: 'asdlfk' )
+user2 = User.create(username: 'dude_brah', hometown_city: 'houston', hometown_country: 'USA', email: 'brahsforlife@gmail.com', password: 'asdlfk' )
 
 houston = City.create(name: "Houston", country: "USA", city_api_id: 4699066)
 austin = City.create(name: "Austin", country: "USA", city_api_id: 4671654)

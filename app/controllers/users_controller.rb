@@ -1,10 +1,10 @@
   class UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+    skip_before_action :define_current_user, only: [ :authenticate, :create ]
     # GET /users
     def index
-      @users = User.all
-      render json: @users
+      users = User.all
+      render json: users
     end
 
     # GET /users/1
@@ -13,22 +13,36 @@
 
     # GET /users/new
     def new
-      @user = User.new
+      user = User.new
     end
 
     # GET /users/1/edit
     def edit
     end
 
+    def authenticate
+      # Find the user by looking for the entered username in Users
+      user = User.find_by(username: params[:username])
+      # Check if the password they wrote is correct
+      if user != nil && user.authenticate(params[:password])
+        render json: user, methods: [ :auth_token ]
+      else
+        render json: {error: true, message: 'Login Failed' }
+      end
+
+    end
+
     # POST /users
     def create
-      @user = User.new(user_params)
+      user = User.create(user_params)
+      # byebug # user.errors.full_messages
+      render json: user
 
-      if @user.save
-        redirect_to @user, notice: 'User was successfully created.'
-      else
-        render json: @user
-      end
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def user_params
+      params.permit(:username, :hometown_city, :hometown_country, :email, :password)
     end
 
     # PATCH/PUT /users/1
@@ -52,23 +66,8 @@
         @user = User.find(params[:id])
       end
 
-      # Only allow a trusted parameter "white list" through.
-      def user_params
-        params.fetch(:user, {})
-      end
+      
 
-      def authenticate
-        # Find the user by looking for the entered username in Users
-        @user = User.find_by(username: params[:username])
-        # Check if the password they wrote is correct
-        if @user != nil && @user.authenticate( params[:password])
-          session[:user_id] = @user.id
-
-          render json: @user
-        else
-          puts "can't sit here"
-        end
-
-      end
+      
 
   end

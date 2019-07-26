@@ -3,8 +3,8 @@
 
     # GET /cities
     def index
-      @cities = City.all
-      render json: @cities
+      cities = City.all
+      render json: cities
     end
 
     # GET /cities/1
@@ -22,14 +22,16 @@
 
     # POST /cities
     def create
-      @city = City.new(city_params)
-
-      if @city.save
-        redirect_to @city, notice: 'City was successfully created.'
-      else
-        render :new
-      end
+      @city = City.create(city_params)
+      render json: @city
     end
+
+    # Only allow a trusted parameter "white list" through.
+    def city_params
+      params.permit(:name, :country)
+
+    end
+end
 
     # PATCH/PUT /cities/1
     def update
@@ -52,9 +54,5 @@
         @city = City.find(params[:id])
       end
 
-      # Only allow a trusted parameter "white list" through.
-      def city_params
-        params.fetch(:city, {})
-      end
-  end
+      
 

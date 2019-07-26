@@ -5,8 +5,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :hometown_city
       t.string :hometown_country
       t.string :email
-      t.string :hashed_password
-      t.string :salt
+      t.string :password_digest
       t.timestamps
     end
   end

@@ -4,6 +4,7 @@
     # GET /user_cities
     def index
       @user_cities = UserCity.all
+      render json: @user_cities
     end
 
     # GET /user_cities/1

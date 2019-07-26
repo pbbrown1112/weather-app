@@ -37,8 +37,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_184945) do
     t.string "hometown_city"
     t.string "hometown_country"
     t.string "email"
-    t.string "hashed_password"
-    t.string "salt"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
