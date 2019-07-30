@@ -12,8 +12,8 @@ user2 = User.create(username: 'dude_brah', hometown_city: 'houston', hometown_co
 user3 = User.create(username: 'username', hometown_city: 'houston', hometown_country: 'USA', email: 'brahsforlife@gmail.com', password: 'password' )
 
 
-houston = City.create(name: "Houston", country: "USA", city_api_id: 4699066)
-austin = City.create(name: "Austin", country: "USA", city_api_id: 4671654)
+houston = City.create(name: "Houston", country: "USA")
+austin = City.create(name: "Austin", country: "USA")
 
 user_city1 = UserCity.create(user: user1, city: houston)
 user_city2 = UserCity.create(user: user1, city: austin)

@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2019_07_25_184945) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "country"
-    t.integer "city_api_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

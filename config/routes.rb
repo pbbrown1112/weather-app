@@ -4,7 +4,10 @@ Rails.application.routes.draw do
       resources :cities
 
       post '/login', to: 'users#authenticate'
+
       post '/signup', to: 'users#create'
+
+      post '/users/:id', to: 'users#create_city'
 
       # resources :user_cities
   

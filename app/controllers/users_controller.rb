@@ -1,5 +1,5 @@
   class UsersController < ApplicationController
-    
+
     before_action :set_user, only: [:show, :edit, :update, :destroy]
     skip_before_action :define_current_user, only: [ :authenticate, :create ]
 
@@ -40,6 +40,14 @@
       # byebug # user.errors.full_messages
       render json: user
 
+    end
+
+    # Create City for User
+
+    def create_city
+      user = User.find_by(username: params[:username])
+      City.create(name: params[:name], country: params[:country])
+      
     end
 
     # Only allow a trusted parameter "white list" through.
