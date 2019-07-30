@@ -11,6 +11,9 @@
 
     # GET /users/1
     def show
+      user = User.find_by(id: params[:id])
+      cities = user.cities
+      render json: user
     end
 
     # GET /users/new
@@ -45,8 +48,11 @@
     # Create City for User
 
     def create_city
-      user = User.find_by(username: params[:username])
-      City.create(name: params[:name], country: params[:country])
+
+      user = User.find_by(id: params[:id])
+      city = City.create(name: params[:name], country: params[:country])
+      UserCity.create(user: user, city: city)
+      render json: user
       
     end
 
